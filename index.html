@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ley 1581 de 2012 — Habilidades Informáticas en el Ámbito Jurídico</title>
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-light: #2E4A7A;
+    --gold: #C9A227;
+    --gold-light: #E8C547;
+    --white: #FFFFFF;
+    --off-white: #F7F3EC;
+    --gray: #4A5568;
+    --light-gray: #E2E8F0;
+    --red: #C0392B;
+    --green: #1A7A4A;
+    --teal: #0D7A6B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', Calibri, Arial, sans-serif; background: var(--off-white); color: var(--gray); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    background: var(--navy); border-bottom: 3px solid var(--gold);
+    display: flex; align-items: center; padding: 0 24px; height: 58px;
+  }
+  nav .logo { color: var(--gold); font-weight: 700; font-size: 1rem; white-space: nowrap; margin-right: 32px; }
+  nav ul { display: flex; list-style: none; gap: 4px; flex-wrap: wrap; }
+  nav ul li a {
+    color: var(--light-gray); font-size: 0.78rem; padding: 6px 10px; border-radius: 4px;
+    text-decoration: none; transition: background .2s, color .2s;
+  }
+  nav ul li a:hover, nav ul li a.active { background: var(--gold); color: var(--navy); font-weight: 700; }
+
+  /* ── HERO ── */
+  #portada {
+    min-height: 100vh; background: var(--navy);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 24px 48px; position: relative; overflow: hidden;
+  }
+  #portada::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--gold);
+  }
+  #portada::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: var(--gold);
+  }
+  .hero-icon { font-size: 5rem; margin-bottom: 20px; }
+  #portada h1 { color: var(--gold); font-size: 2.8rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
+  #portada .subtitle { color: var(--white); font-size: 1.3rem; font-style: italic; margin-bottom: 24px; }
+  .divider { width: 120px; height: 3px; background: var(--gold); margin: 12px auto 20px; }
+  #portada .meta { color: var(--light-gray); font-size: 0.95rem; line-height: 2; }
+  #portada .badge { display: inline-block; background: var(--gold); color: var(--navy); padding: 6px 20px; border-radius: 20px; font-weight: 700; margin-top: 20px; font-size: 0.9rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 24px 60px; max-width: 1100px; margin: 0 auto; }
+  section + section { border-top: 2px solid var(--light-gray); }
+  .section-title {
+    font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 8px;
+    border-left: 6px solid var(--gold); padding-left: 14px;
+  }
+  .section-subtitle { font-size: 1rem; color: var(--gray); font-style: italic; margin-bottom: 32px; padding-left: 20px; }
+
+  /* ── INTRO ── */
+  .intro-box { background: var(--white); border-radius: 10px; padding: 32px; box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
+  .intro-box p { line-height: 1.9; font-size: 1.05rem; margin-bottom: 16px; text-align: justify; }
+  .intro-box p:last-child { margin-bottom: 0; }
+
+  /* ── OBJETIVOS ── */
+  .obj-general { background: var(--gold); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px; }
+  .obj-general h3 { color: var(--navy); font-size: 1.1rem; margin-bottom: 8px; }
+  .obj-general p { color: var(--navy); font-size: 1rem; line-height: 1.7; }
+  .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .obj-card { background: var(--white); border-radius: 10px; padding: 24px; box-shadow: 0 4px 14px rgba(0,0,0,0.07); border-top: 4px solid var(--teal); }
+  .obj-card .num { display: inline-block; background: var(--teal); color: var(--white); border-radius: 50%; width: 36px; height: 36px; line-height: 36px; text-align: center; font-weight: 700; margin-bottom: 10px; font-size: 1.1rem; }
+  .obj-card h4 { color: var(--navy); font-size: 1rem; margin-bottom: 8px; }
+  .obj-card p { font-size: 0.95rem; line-height: 1.7; }
+
+  /* ── TEMA CARDS ── */
+  .tema-block { background: var(--white); border-radius: 12px; padding: 30px 32px; margin-bottom: 28px; box-shadow: 0 4px 18px rgba(0,0,0,0.07); border-left: 6px solid var(--navy); }
+  .tema-block h2 { color: var(--navy); font-size: 1.3rem; margin-bottom: 16px; }
+  .tema-block p, .tema-block li { font-size: 0.98rem; line-height: 1.8; }
+  .tema-block ul, .tema-block ol { padding-left: 20px; margin-top: 8px; }
+  .tema-block li { margin-bottom: 8px; }
+  .tag { display: inline-block; background: var(--navy); color: var(--gold); border-radius: 4px; padding: 2px 10px; font-size: 0.8rem; margin-bottom: 10px; }
+
+  /* ── PRINCIPIOS GRID ── */
+  .principios-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+  .prin-card { background: var(--navy); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+  .prin-card .circle { background: var(--gold); border-radius: 50%; width: 48px; height: 48px; line-height: 48px; font-size: 1.3rem; font-weight: 800; color: var(--navy); margin: 0 auto 14px; }
+  .prin-card h4 { color: var(--gold-light); font-size: 1rem; margin-bottom: 8px; }
+  .prin-card p { color: var(--light-gray); font-size: 0.88rem; line-height: 1.6; }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  .compare-table th { background: var(--navy); color: var(--white); padding: 14px 16px; text-align: left; }
+  .compare-table th.gold { background: var(--gold); color: var(--navy); }
+  .compare-table td { padding: 12px 16px; border: 1px solid var(--light-gray); }
+  .compare-table tr:nth-child(even) td { background: #F0EDE4; }
+  .compare-table td:first-child { font-weight: 700; color: var(--navy); background: #EDE9DF; }
+
+  /* ── SI/NO GRID ── */
+  .si-no-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .si-col, .no-col { border-radius: 10px; overflow: hidden; }
+  .si-col .header { background: var(--green); color: var(--white); padding: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+  .no-col .header { background: var(--red); color: var(--white); padding: 14px; text-align: center; font-weight: 700; font-size: 1.1rem; }
+  .si-col .items, .no-col .items { background: var(--white); padding: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.07); }
+  .si-item, .no-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--light-gray); font-size: 0.93rem; line-height: 1.6; }
+  .si-item:last-child, .no-item:last-child { border-bottom: none; }
+  .si-item .ico { color: var(--green); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+  .no-item .ico { color: var(--red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+
+  /* ── SANCIONES ── */
+  .sancion-card { background: var(--navy); border-radius: 10px; padding: 22px 26px; display: flex; align-items: center; gap: 24px; margin-bottom: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+  .sancion-card .monto { background: #8B1A1A; color: var(--white); border-radius: 8px; padding: 10px 16px; font-weight: 800; font-size: 1.05rem; white-space: nowrap; min-width: 180px; text-align: center; }
+  .sancion-card .info h4 { color: var(--gold-light); font-size: 1rem; margin-bottom: 6px; }
+  .sancion-card .info p { color: var(--light-gray); font-size: 0.92rem; line-height: 1.6; }
+  .sancion-note { background: #FFF3E0; border-left: 4px solid #E67E22; border-radius: 4px; padding: 12px 16px; font-size: 0.9rem; color: #7D3C00; margin-top: 16px; }
+
+  /* ── DATOS CATEGORIAS ── */
+  .data-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+  .data-card { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+  .data-card .header { padding: 14px; text-align: center; color: var(--white); font-weight: 700; font-size: 1rem; }
+  .data-card .body { background: var(--white); padding: 18px; font-size: 0.92rem; line-height: 1.7; }
+  .data-card .icon { font-size: 2rem; display: block; text-align: center; margin-bottom: 10px; }
+
+  /* ── ACTIVIDADES ── */
+  .act-card { background: var(--white); border-radius: 10px; padding: 22px 26px; margin-bottom: 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.07); display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: start; }
+  .act-num { background: var(--gold); color: var(--navy); border-radius: 8px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; }
+  .act-tipo { font-weight: 700; color: var(--navy); font-size: 1rem; margin-bottom: 6px; }
+  .act-desc { font-size: 0.93rem; line-height: 1.7; }
+  .act-dur { background: var(--teal); color: var(--white); border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; font-weight: 700; white-space: nowrap; align-self: center; }
+
+  /* ── MAPA CONCEPTUAL ── */
+  .mapa-container { background: var(--white); border-radius: 12px; padding: 30px; box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .mapa-center { background: var(--navy); color: var(--white); border-radius: 50px; padding: 16px 32px; text-align: center; font-weight: 700; font-size: 1.1rem; border: 3px solid var(--gold); display: block; max-width: 340px; margin: 0 auto 28px; }
+  .mapa-branches { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .mapa-node { padding: 14px 18px; border-radius: 8px; color: var(--white); font-size: 0.9rem; font-weight: 600; text-align: center; line-height: 1.5; }
+
+  /* ── BIBILOGRAFÍA ── */
+  .biblio-list { list-style: none; }
+  .biblio-list li { display: flex; gap: 14px; background: var(--white); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-size: 0.93rem; line-height: 1.7; }
+  .biblio-list li .bnum { background: var(--gold); color: var(--navy); border-radius: 4px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); border-top: 3px solid var(--gold); padding: 28px 24px; text-align: center; }
+  footer p { color: var(--light-gray); font-size: 0.9rem; line-height: 2; }
+  footer strong { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #portada h1 { font-size: 2rem; }
+    .si-no-grid { grid-template-columns: 1fr; }
+    .act-card { grid-template-columns: 1fr; }
+    .act-dur { justify-self: start; }
+    nav ul { gap: 2px; }
+    nav ul li a { font-size: 0.7rem; padding: 4px 7px; }
+  }
+
+  /* Active section highlight */
+  .highlight { background: #FFFDE7; border-left-color: var(--gold) !important; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ NAVIGATION ══════════════════ -->
+<nav>
+  <div class="logo">⚖ Ley 1581/2012</div>
+  <ul>
+    <li><a href="#portada">Inicio</a></li>
+    <li><a href="#introduccion">Intro</a></li>
+    <li><a href="#objetivos">Objetivos</a></li>
+    <li><a href="#ley1581">Ley 1581</a></li>
+    <li><a href="#principios8">8 Principios</a></li>
+    <li><a href="#comparacion">1266 vs 1581</a></li>
+    <li><a href="#cuando">¿Cuándo?</a></li>
+    <li><a href="#principios7">7 Principios</a></li>
+    <li><a href="#sanciones">Sanciones</a></li>
+    <li><a href="#datos">Datos</a></li>
+    <li><a href="#decreto">Decreto</a></li>
+    <li><a href="#actividades">Actividades</a></li>
+    <li><a href="#mapa">Mapa</a></li>
+    <li><a href="#bibliografia">Bibliografía</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════ PORTADA ══════════════════ -->
+<div id="portada">
+  <div class="hero-icon">⚖️</div>
+  <h1>LEY 1581 DE 2012</h1>
+  <p class="subtitle">Protección de Datos Personales en Colombia</p>
+  <div class="divider"></div>
+  <div class="meta">
+    Habilidades Informáticas en el Ámbito Jurídico<br>
+    Facultad de Derecho y Ciencia Política<br>
+    Programa Académico de Derecho <br>
+    Universidad del Valle.
+  </div>
+  <div class="divider"></div>
+  <div style="color: var(--light-gray); font-size: 0.92rem; line-height: 1.9;">
+    <span style="color: var(--gold); font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;">Integrantes</span><br>
+    Esteban Molina Peralta<br>
+    Andrés Eduardo Montoya Pipicano<br>
+    Cristhian David Moreno Cardona
+  </div>
+  <span class="badge">5 de marzo de 2026</span>
+</div>
+
+<!-- ══════════════════ INTRODUCCIÓN ══════════════════ -->
+<section id="introduccion" style="padding-top: 88px;">
+  <h2 class="section-title">Introducción</h2>
+  <p class="section-subtitle">El contexto normativo de la protección de datos en Colombia</p>
+  <div class="intro-box">
+    <p>En la era digital, los datos personales son uno de los activos más valiosos que existen. Cada vez que navegamos por internet, realizamos una transacción bancaria o simplemente llenamos un formulario, dejamos rastros de información que nos identifican como individuos únicos.</p>
+    <p>Colombia, consciente de esta realidad, promulgó la <strong>Ley Estatutaria 1581 del 17 de octubre de 2012</strong>, conocida como la Ley General de Protección de Datos Personales. Esta norma desarrolla el artículo 15 de la Constitución Política y establece las reglas del juego para el tratamiento de información personal tanto en el sector público como en el privado.</p>
+    <p>Como futuros abogados, entender esta ley es fundamental: no solo para proteger los derechos de sus clientes, sino también para asesorar a empresas, entidades públicas y particulares sobre el manejo correcto de la información personal. El incumplimiento de esta norma puede acarrear sanciones económicas muy significativas e incluso el cierre de operaciones.</p>
+    <p>Esta presentación les guiará por los aspectos más importantes de la Ley 1581 de 2012: sus principios, alcances, aplicación práctica, diferencias con la Ley 1266 de 2008 y el régimen sancionatorio vigente.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ OBJETIVOS ══════════════════ -->
+<section id="objetivos">
+  <h2 class="section-title">Objetivos de Aprendizaje</h2>
+  <p class="section-subtitle">¿Qué aprenderemos con este material?</p>
+
+  <div class="obj-general">
+    <h3>🎯 Objetivo General</h3>
+    <p>Comprender el marco normativo de la Ley 1581 de 2012 sobre protección de datos personales en Colombia, identificando sus principios, alcances, sanciones y aplicación práctica en el ejercicio profesional del Derecho.</p>
+  </div>
+
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="num">01</div>
+      <h4>Identificar y distinguir</h4>
+      <p>Los fundamentos, principios y categorías de datos establecidos en la Ley 1581 de 2012 y su Decreto Reglamentario 1377 de 2013 (compilado en el Decreto 1081 de 2015).</p>
+    </div>
+    <div class="obj-card">
+      <div class="num">02</div>
+      <h4>Analizar y comparar</h4>
+      <p>Las diferencias entre la Ley 1266 de 2008 (Ley de Habeas Data financiero) y la Ley 1581 de 2012 (Ley General de Protección de Datos Personales), determinando cuándo aplica cada una.</p>
+    </div>
+    <div class="obj-card">
+      <div class="num">03</div>
+      <h4>Aplicar y evaluar</h4>
+      <p>Las obligaciones y sanciones derivadas del incumplimiento de la Ley 1581 de 2012 en casos prácticos del ámbito jurídico colombiano, tomando decisiones fundamentadas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ LEY 1581 ══════════════════ -->
+<section id="ley1581">
+  <h2 class="section-title">Ley 1581 de 2012</h2>
+  <p class="section-subtitle">¿Qué dice y qué establece esta ley?</p>
+
+  <div class="tema-block">
+    <span class="tag">Definición</span>
+    <h2>¿Qué es la Ley 1581 de 2012?</h2>
+    <p>La <strong>Ley Estatutaria 1581 del 17 de octubre de 2012</strong> es la norma general de protección de datos personales en Colombia. Su nombre completo es: <em>"Por la cual se dictan disposiciones generales para la protección de datos personales."</em></p>
+    <p style="margin-top:12px;">Desarrolla el <strong>artículo 15 de la Constitución Política</strong> (derecho a la intimidad, al buen nombre y al habeas data) y fue declarada constitucional por la Sentencia C-748 de 2011 de la Corte Constitucional.</p>
+  </div>
+
+  <div class="tema-block">
+    <span class="tag">Contenido normativo</span>
+    <h2>¿Qué establece la Ley 1581 de 2012 en Colombia?</h2>
+    <ul>
+      <li><strong>Ámbito de aplicación:</strong> Aplica a cualquier tratamiento de datos personales efectuado en Colombia o cuando el responsable esté domiciliado en el país. Existen excepciones: bases de datos de seguridad nacional, actividades domésticas, bases periodísticas con fines informativos, entre otras (Art. 2°).</li>
+      <li><strong>Definiciones clave (Art. 3°):</strong> Define dato personal, titular, responsable del tratamiento, encargado del tratamiento, bases de datos, aviso de privacidad y tratamiento.</li>
+      <li><strong>Categorías de datos (Arts. 5° y 6°):</strong> Clasifica los datos en públicos, semiprivados, privados y sensibles.</li>
+      <li><strong>Autorización del titular (Art. 9°):</strong> El tratamiento requiere autorización previa, expresa e informada del titular, salvo excepciones legales. Esta autorización puede ser escrita, oral o por conductas inequívocas.</li>
+      <li><strong>Derechos del titular (Art. 8°):</strong> Conocer, actualizar, rectificar y suprimir sus datos; revocar la autorización; acceder gratuitamente a sus datos; presentar quejas ante la SIC.</li>
+      <li><strong>Deberes del responsable (Art. 17°):</strong> Solicitar y guardar la autorización, informar al titular, garantizar la seguridad, atender consultas y reclamos, registrar la base de datos en el RNBD.</li>
+      <li><strong>Transferencia internacional (Arts. 26° y 27°):</strong> Se permite solo si el país receptor ofrece niveles adecuados de protección o si existen garantías suficientes.</li>
+      <li><strong>Autoridad de control (Arts. 19° a 25°):</strong> La Superintendencia de Industria y Comercio (SIC) vigila el cumplimiento y aplica sanciones.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════ 8 PRINCIPIOS ══════════════════ -->
+<section id="principios8">
+  <h2 class="section-title">Los 8 Principios de la Ley de Protección de Datos</h2>
+  <p class="section-subtitle">Artículo 4° — Ley 1581 de 2012</p>
+
+  <div class="principios-grid">
+    <div class="prin-card">
+      <div class="circle">1</div>
+      <h4>Legalidad</h4>
+      <p>El tratamiento de datos es una actividad reglada. Debe sujetarse a lo establecido en la ley y demás disposiciones que la desarrollen.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">2</div>
+      <h4>Finalidad</h4>
+      <p>El tratamiento debe obedecer a una finalidad legítima, de acuerdo con la Constitución y la ley, que debe ser informada al titular.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">3</div>
+      <h4>Libertad</h4>
+      <p>El tratamiento solo puede realizarse con el consentimiento previo, expreso e informado del titular. No puede hacerse sin autorización legal.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">4</div>
+      <h4>Veracidad / Calidad</h4>
+      <p>La información sujeta a tratamiento debe ser veraz, completa, exacta, actualizada, comprobable y comprensible.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">5</div>
+      <h4>Transparencia</h4>
+      <p>En el tratamiento debe garantizarse el derecho del titular a obtener del responsable información acerca de la existencia de datos que le conciernan.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">6</div>
+      <h4>Acceso y Circulación Restringida</h4>
+      <p>El tratamiento solo lo pueden hacer personas autorizadas por el titular o por ley. Los datos no pueden estar disponibles en internet sin restricciones.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">7</div>
+      <h4>Seguridad</h4>
+      <p>El responsable debe implementar medidas técnicas, humanas y administrativas para proteger los datos contra adulteración, pérdida o acceso no autorizado.</p>
+    </div>
+    <div class="prin-card">
+      <div class="circle">8</div>
+      <h4>Confidencialidad</h4>
+      <p>Quienes intervengan en el tratamiento están obligados a guardar reserva sobre los datos, incluso después de finalizada su relación con el titular.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ COMPARACIÓN ══════════════════ -->
+<section id="comparacion">
+  <h2 class="section-title">Diferencia entre Ley 1266 de 2008 y Ley 1581 de 2012</h2>
+  <p class="section-subtitle">Dos leyes distintas para propósitos complementarios</p>
+
+  <div class="tema-block">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th class="gold">Ley 1266 de 2008<br><small>(Habeas Data Financiero)</small></th>
+          <th>Ley 1581 de 2012<br><small>(Protección de Datos General)</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nombre</td>
+          <td>Ley de Habeas Data (Financiero)</td>
+          <td>Ley General de Protección de Datos Personales</td>
+        </tr>
+        <tr>
+          <td>Alcance</td>
+          <td>Datos financieros, crediticios, comerciales y de servicios</td>
+          <td>Cualquier dato personal (salvo excepciones expresas)</td>
+        </tr>
+        <tr>
+          <td>Titulares</td>
+          <td>Solo personas naturales con historial crediticio</td>
+          <td>Toda persona natural cuyos datos sean objeto de tratamiento</td>
+        </tr>
+        <tr>
+          <td>Objetivo principal</td>
+          <td>Regular el manejo de información crediticia y financiera (centrales de riesgo)</td>
+          <td>Garantizar el derecho fundamental al habeas data en todos los ámbitos</td>
+        </tr>
+        <tr>
+          <td>Operadores principales</td>
+          <td>Centrales de información (DataCrédito, TransUnión, CIFIN)</td>
+          <td>Cualquier empresa, entidad pública o persona que trate datos personales</td>
+        </tr>
+        <tr>
+          <td>Autoridad de control</td>
+          <td>SIC + Superintendencia Financiera (sector financiero)</td>
+          <td>Superintendencia de Industria y Comercio (SIC)</td>
+        </tr>
+        <tr>
+          <td>Exclusiones</td>
+          <td>No regula datos fuera del sector financiero</td>
+          <td>Excluye seguridad nacional, datos domésticos, bases periodísticas, entre otros</td>
+        </tr>
+        <tr>
+          <td>Tiempo de permanencia</td>
+          <td>Regula el tiempo de reportes negativos (máx. doble del plazo incumplido)</td>
+          <td>El dato se conserva solo el tiempo necesario para la finalidad</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px; font-size:0.9rem; color:#7D3C00; background:#FFF3E0; padding:12px; border-radius:6px; border-left:4px solid #E67E22;">
+      <strong>Regla práctica:</strong> Si un cliente pregunta por sus reportes en DataCrédito → Ley 1266 de 2008. Si una empresa quiere usar datos personales para marketing o RRHH → Ley 1581 de 2012.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════ ¿CUÁNDO APLICAR? ══════════════════ -->
+<section id="cuando">
+  <h2 class="section-title">¿Cuándo debemos aplicar la Ley 1581?</h2>
+  <p class="section-subtitle">Supuestos prácticos de aplicación y exclusión</p>
+
+  <div class="si-no-grid">
+    <div class="si-col">
+      <div class="header">✓ SÍ APLICA LA LEY 1581</div>
+      <div class="items">
+        <div class="si-item"><span class="ico">✓</span><span>Cuando se recolectan datos personales de clientes, usuarios o beneficiarios de servicios o productos.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al crear bases de datos con información de empleados, proveedores o contratistas.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al compartir o transferir información personal a terceros dentro o fuera de Colombia.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al usar datos para enviar publicidad, promociones o comunicaciones comerciales.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al procesar información en páginas web, aplicaciones móviles o sistemas digitales.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al instalar sistemas de videovigilancia o grabar conversaciones con fines de registro.</span></div>
+        <div class="si-item"><span class="ico">✓</span><span>Al usar datos biométricos (huellas, reconocimiento facial) para control de acceso o asistencia.</span></div>
+      </div>
+    </div>
+    <div class="no-col">
+      <div class="header">✕ NO APLICA LA LEY 1581</div>
+      <div class="items">
+        <div class="no-item"><span class="ico">✕</span><span>Actividades estrictamente personales o domésticas (agenda familiar, directorio personal del celular).</span></div>
+        <div class="no-item"><span class="ico">✕</span><span>Bases de datos exclusivas de seguridad y defensa nacional (Policía, inteligencia del Estado).</span></div>
+        <div class="no-item"><span class="ico">✕</span><span>Bases de datos con fines periodísticos o informativos (con matices jurisprudenciales).</span></div>
+        <div class="no-item"><span class="ico">✕</span><span>Información de personas fallecidas, salvo fines históricos, estadísticos o científicos.</span></div>
+        <div class="no-item"><span class="ico">✕</span><span>Información completamente anonimizada que no permita identificar a ningún titular.</span></div>
+        <div class="no-item"><span class="ico">✕</span><span>Datos crediticios y financieros en centrales de riesgo (esos se rigen por la Ley 1266 de 2008).</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 7 PRINCIPIOS ══════════════════ -->
+<section id="principios7">
+  <h2 class="section-title">Los 7 Principios de Protección de Datos Personales</h2>
+  <p class="section-subtitle">Perspectiva internacional — Estándar OCDE / Decreto 1377 de 2013</p>
+
+  <div class="tema-block">
+    <p style="margin-bottom:20px;">Desde una perspectiva del derecho comparado y los estándares internacionales (OCDE, RGPD europeo e influencia en el Decreto 1377 de 2013), se distinguen 7 principios orientadores que complementan los del artículo 4° de la Ley 1581:</p>
+
+    <table class="compare-table" style="margin-top:0;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Principio</th>
+          <th>Descripción práctica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Consentimiento</strong></td>
+          <td>El titular debe dar su autorización libre, previa, expresa e informada para el tratamiento de sus datos.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Limitación de finalidad</strong></td>
+          <td>Los datos solo pueden usarse para los fines declarados al momento de la recolección. No se pueden usar para otros propósitos sin nueva autorización.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Minimización de datos</strong></td>
+          <td>Solo se deben recoger los datos estrictamente necesarios para el fin declarado (principio de proporcionalidad).</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Exactitud</strong></td>
+          <td>Los datos deben ser exactos, completos y actualizados cuando sea necesario para los fines del tratamiento.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Limitación de almacenamiento</strong></td>
+          <td>Los datos se conservan solo durante el tiempo necesario para la finalidad del tratamiento, luego deben suprimirse o anonimizarse.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>Integridad y confidencialidad</strong></td>
+          <td>Se deben implementar medidas de seguridad técnicas, humanas y administrativas adecuadas para proteger los datos contra pérdida, acceso no autorizado o destrucción.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>Responsabilidad proactiva (Accountability)</strong></td>
+          <td>El responsable debe no solo cumplir los principios, sino también poder demostrar activamente que los cumple. Ello implica políticas de privacidad, registros y procedimientos documentados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════ SANCIONES ══════════════════ -->
+<section id="sanciones">
+  <h2 class="section-title">Sanciones por Incumplimiento de la Ley 1581 de 2012</h2>
+  <p class="section-subtitle">Artículos 22 a 24 — Superintendencia de Industria y Comercio (SIC)</p>
+
+  <div class="sancion-card">
+    <div class="monto">Hasta 2.000 SMMLV</div>
+    <div class="info">
+      <h4>⚠ Multas a personas naturales</h4>
+      <p>Impuestas a las personas naturales responsables de las infracciones. Aplica cuando el individuo fue directamente responsable del tratamiento indebido.</p>
+    </div>
+  </div>
+  <div class="sancion-card">
+    <div class="monto">Hasta 2.000 SMMLV</div>
+    <div class="info">
+      <h4>⚠ Multas a personas jurídicas</h4>
+      <p>Impuestas a empresas u organizaciones responsables del tratamiento. Es la sanción más frecuente y puede ser muy significativa para cualquier organización.</p>
+    </div>
+  </div>
+  <div class="sancion-card">
+    <div class="monto">Hasta 6 meses</div>
+    <div class="info">
+      <h4>⚠ Cierre temporal de operaciones</h4>
+      <p>Suspensión de las operaciones relacionadas con el tratamiento de datos. Puede causar un daño reputacional y operativo grave para la organización.</p>
+    </div>
+  </div>
+  <div class="sancion-card">
+    <div class="monto">Definitivo</div>
+    <div class="info">
+      <h4>⚠ Cierre definitivo de operaciones</h4>
+      <p>En casos de reincidencia en infracciones graves o cuando la SIC determine que la organización no presenta condiciones mínimas para garantizar los derechos de los titulares.</p>
+    </div>
+  </div>
+  <div class="sancion-note">
+    <strong>📌 Notas importantes:</strong> SMMLV = Salario Mínimo Mensual Legal Vigente. La SIC también puede ordenar la suspensión temporal de actividades, la suspensión de certificaciones o registros y la destrucción de bases de datos. Las sanciones se imponen tras un proceso administrativo que garantiza el derecho al debido proceso. Las infracciones pueden ser leves, graves o gravísimas, determinando el monto de la sanción. (Art. 23°, Ley 1581 de 2012).
+  </div>
+</section>
+
+<!-- ══════════════════ DATOS PROTEGIDOS ══════════════════ -->
+<section id="datos">
+  <h2 class="section-title">¿Cuáles son los Datos Personales Protegidos por la Ley?</h2>
+  <p class="section-subtitle">Categorías según la Ley 1581 de 2012 — Artículos 3°, 5° y 6°</p>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="header" style="background:#1A7A4A;">🌐 DATOS PÚBLICOS</div>
+      <div class="body">
+        <p>Son accesibles a cualquier persona, ya sea por mandato legal o por su naturaleza.</p>
+        <ul style="margin-top:10px; padding-left:18px;">
+          <li>Nombre completo</li>
+          <li>Profesión u oficio</li>
+          <li>Estado civil</li>
+          <li>Información del registro mercantil</li>
+          <li>Información del boletín de deudores morosos del Estado</li>
+        </ul>
+      </div>
+    </div>
+    <div class="data-card">
+      <div class="header" style="background:#0D5C8A;">👥 DATOS SEMIPRIVADOS</div>
+      <div class="body">
+        <p>No son íntimos ni reservados, pero su conocimiento o divulgación requiere autorización del titular o ciertos requisitos legales.</p>
+        <ul style="margin-top:10px; padding-left:18px;">
+          <li>Teléfono</li>
+          <li>Correo electrónico</li>
+          <li>Dirección de residencia</li>
+          <li>Datos laborales generales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="data-card">
+      <div class="header" style="background:#7A5200;">🔒 DATOS PRIVADOS</div>
+      <div class="body">
+        <p>Son íntimos o reservados. Solo son relevantes para el titular y su divulgación puede causarle daño.</p>
+        <ul style="margin-top:10px; padding-left:18px;">
+          <li>Historia clínica</li>
+          <li>Situación financiera personal</li>
+          <li>Datos bancarios</li>
+          <li>Vida sexual</li>
+          <li>Creencias personales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="data-card">
+      <div class="header" style="background:#8B1A1A;">🛡️ DATOS SENSIBLES</div>
+      <div class="body">
+        <p>Afectan la intimidad o pueden generar discriminación. Tienen protección reforzada (Art. 6°).</p>
+        <ul style="margin-top:10px; padding-left:18px;">
+          <li>Origen racial o étnico</li>
+          <li>Orientación sexual</li>
+          <li>Afiliación política</li>
+          <li>Convicciones religiosas</li>
+          <li>Datos biométricos</li>
+          <li>Datos de salud</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tema-block" style="margin-top:24px; border-left-color: #8B1A1A;">
+    <span class="tag" style="background:#8B1A1A;">Atención especial</span>
+    <h2>Datos Sensibles — Protección Reforzada</h2>
+    <p>El artículo 6° de la Ley 1581 de 2012 establece que el tratamiento de datos sensibles está <strong>prohibido por regla general</strong>. Solo se permite excepcionalmente cuando:</p>
+    <ul>
+      <li>El titular haya dado su autorización explícita.</li>
+      <li>El tratamiento sea necesario para proteger el interés vital del titular y este esté física o jurídicamente incapacitado.</li>
+      <li>Se realice por fundaciones, ONG o asociaciones sin ánimo de lucro con finalidad política, filosófica, religiosa o sindical (solo con sus miembros).</li>
+      <li>El tratamiento se refiera a datos necesarios para el reconocimiento, ejercicio o defensa de un derecho en un proceso judicial.</li>
+      <li>Tenga una finalidad histórica, estadística o científica, adoptando medidas para suprimir la identidad del titular.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════ DECRETO ══════════════════ -->
+<section id="decreto">
+  <h2 class="section-title">¿Qué dice el Decreto 1377 de 2013 (Decreto 1081 de 2015)?</h2>
+  <p class="section-subtitle">El decreto que reglamenta la Ley 1581 de 2012</p>
+
+  <div class="tema-block">
+    <p>El <strong>Decreto 1377 del 27 de junio de 2013</strong>, expedido por el Presidente de la República, reglamentó parcialmente la Ley 1581 de 2012. Fue compilado en el <strong>Decreto Único Reglamentario 1081 de 2015</strong> del Sector Presidencia de la República.</p>
+
+    <p style="margin-top:12px;">Sus aspectos más relevantes son:</p>
+    <ul>
+      <li><strong>Autorización del titular:</strong> Regula la forma válida de obtener la autorización: puede ser escrita, oral o a través de conductas inequívocas. Define lo que debe contener la autorización para ser válida.</li>
+      <li><strong>Aviso de privacidad:</strong> Cuando el responsable no tiene relación directa con el titular (por ejemplo, compró una base de datos), debe enviarle un aviso de privacidad antes de iniciar el tratamiento, informándole sus derechos y la política de privacidad.</li>
+      <li><strong>Políticas de tratamiento de datos:</strong> Toda organización que trate datos personales debe tener y publicar una política de privacidad que incluya: nombre del responsable, datos de contacto, finalidades, derechos del titular, vigencia, procedimiento para ejercer derechos.</li>
+      <li><strong>Responsable vs. Encargado:</strong> Delimita claramente las obligaciones de cada parte. El responsable define los fines; el encargado trata los datos por cuenta del responsable. Sus relaciones deben estar reguladas por contrato.</li>
+      <li><strong>Transferencia internacional de datos:</strong> Establece los requisitos y garantías para enviar datos personales a otros países: nivel adecuado de protección, cláusulas contractuales tipo, o autorización del titular.</li>
+      <li><strong>Régimen de transición:</strong> Fijó plazos para que las organizaciones adecuaran sus bases de datos existentes a los requisitos de la ley (plazo ya vencido; hoy aplica íntegramente la ley).</li>
+      <li><strong>Certificaciones:</strong> La SIC puede otorgar sellos de protección de datos a quienes demuestren cumplimiento de la normativa.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════ ACTIVIDADES ══════════════════ -->
+<section id="actividades">
+  <h2 class="section-title">Actividad de Aprendizaje</h2>
+  <p class="section-subtitle">Caso Práctico — Análisis jurídico aplicado a la Ley 1581 de 2012</p>
+
+  <!-- CASO HERO BANNER -->
+  <div style="background: var(--navy); border-radius: 14px; padding: 36px 36px 28px; margin-bottom: 32px; position: relative; overflow: hidden;">
+    <div style="position:absolute; top:0; left:0; width:100%; height:5px; background: var(--gold);"></div>
+    <div style="display:inline-block; background: var(--teal); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 4px 16px; border-radius: 20px; margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase;">📋 Caso Práctico</div>
+    <h3 style="color: var(--white); font-size: 1.9rem; font-weight: 800; margin-bottom: 6px;">El Sorteo de <em style="color: var(--gold);">«Salud &amp; Vida S.A.S.»</em></h3>
+    <p style="color: var(--light-gray); font-size: 1rem; font-style: italic; margin-bottom: 20px;">Como consultor jurídico en formación, deberá analizar los hechos y responder las preguntas al final de esta sección.</p>
+
+    <!-- Context -->
+    <div style="background: var(--navy-light); border-radius: 8px; padding: 20px 24px; border-left: 4px solid var(--gold);">
+      <p style="color: var(--light-gray); font-size: 0.97rem; line-height: 1.85;">
+        La empresa <strong style="color: var(--gold-light);">"Salud &amp; Vida S.A.S."</strong>, una cadena de gimnasios en Bogotá, decide realizar un sorteo de una membresía anual para captar nuevos clientes. Para participar, las personas deben llenar un formulario digital en una tableta a la entrada de sus sedes.
+      </p>
+    </div>
+  </div>
+
+  <!-- LOS HECHOS -->
+  <h3 style="color: var(--navy); font-size: 1.2rem; font-weight: 700; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid var(--teal);">Los Hechos</h3>
+
+  <div style="display: grid; gap: 16px; margin-bottom: 36px;">
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); display: flex; overflow: hidden;">
+      <div style="background: #0D7A6B; min-width: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: white;">1</div>
+      <div style="padding: 18px 22px;">
+        <strong style="color: var(--navy); display: block; margin-bottom: 6px;">Recolección de datos</strong>
+        <p style="font-size: 0.95rem; line-height: 1.75;">El formulario solicita: nombre, cédula, teléfono, correo electrónico y una pregunta <em>opcional</em> sobre <strong>"enfermedades preexistentes o lesiones"</strong> para, según el gimnasio, "ofrecer un mejor plan". También se les pide registrar su <strong>huella dactilar</strong> para "validar la identidad en caso de ganar".</p>
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); display: flex; overflow: hidden;">
+      <div style="background: #7A5200; min-width: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: white;">2</div>
+      <div style="padding: 18px 22px;">
+        <strong style="color: var(--navy); display: block; margin-bottom: 6px;">Autorización defectuosa</strong>
+        <p style="font-size: 0.95rem; line-height: 1.75;">Al final del formulario hay un cuadro <strong>pre-marcado</strong> que dice: "Acepto términos y condiciones y el uso de mis datos según la ley". No se explica para qué más se usarán los datos ni se menciona el <strong>derecho a revocar la autorización</strong>.</p>
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); display: flex; overflow: hidden;">
+      <div style="background: #C0392B; min-width: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: white;">3</div>
+      <div style="padding: 18px 22px;">
+        <strong style="color: var(--navy); display: block; margin-bottom: 6px;">Tratamiento posterior indebido</strong>
+        <p style="font-size: 0.95rem; line-height: 1.75;">Un mes después, los participantes empiezan a recibir correos masivos de una <strong>farmacéutica aliada</strong> ofreciendo suplementos dietarios. <strong>"Salud &amp; Vida S.A.S." les vendió la base de datos</strong> para generar ingresos extra.</p>
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); display: flex; overflow: hidden;">
+      <div style="background: #1B2A4A; min-width: 52px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: white;">4</div>
+      <div style="padding: 18px 22px;">
+        <strong style="color: var(--navy); display: block; margin-bottom: 6px;">Reclamación y respuesta evasiva</strong>
+        <p style="font-size: 0.95rem; line-height: 1.75;">Un estudiante de derecho, molesto por el spam, solicita a la farmacéutica que borre sus datos. La farmacéutica responde que ellos <strong>no son los responsables</strong>, sino el gimnasio que les vendió la base de datos de "potenciales clientes con interés en salud".</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PREGUNTAS PARA EL ESTUDIANTE -->
+  <h3 style="color: var(--navy); font-size: 1.2rem; font-weight: 700; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid var(--gold);">Actividad para el Estudiante</h3>
+  <p style="font-size: 0.97rem; margin-bottom: 24px; line-height: 1.7;">Como consultor jurídico en formación, analice el caso y responda cada uno de los siguientes puntos:</p>
+
+  <div style="display: grid; gap: 16px;">
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); overflow: hidden;">
+      <div style="background: #0D7A6B; padding: 14px 22px; display: flex; align-items: center; gap: 14px;">
+        <span style="background: white; color: #0D7A6B; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;">A</span>
+        <strong style="color: white; font-size: 1rem;">Identificación de Actores — Art. 3° de la Ley 1581</strong>
+      </div>
+      <div style="padding: 18px 22px; font-size: 0.95rem; line-height: 1.8;">
+        Identifique quién es el <strong>Titular</strong>, el <strong>Responsable del Tratamiento</strong> y el <strong>Encargado del Tratamiento</strong> en este escenario, según las definiciones del Artículo 3° de la Ley 1581.
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); overflow: hidden;">
+      <div style="background: #7A5200; padding: 14px 22px; display: flex; align-items: center; gap: 14px;">
+        <span style="background: white; color: #7A5200; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;">B</span>
+        <strong style="color: white; font-size: 1rem;">Conflicto de Normas: ¿Ley 1266 de 2008 o Ley 1581 de 2012?</strong>
+      </div>
+      <div style="padding: 18px 22px; font-size: 0.95rem; line-height: 1.8;">
+        ¿Debería resolverse este caso bajo la <strong>Ley 1266 de 2008</strong> o la <strong>Ley 1581 de 2012</strong>? Justifique su respuesta basándose en la naturaleza de los datos y la finalidad del tratamiento.
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); overflow: hidden;">
+      <div style="background: #C0392B; padding: 14px 22px; display: flex; align-items: center; gap: 14px;">
+        <span style="background: white; color: #C0392B; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;">C</span>
+        <strong style="color: white; font-size: 1rem;">Principios Vulnerados — Art. 4° de la Ley 1581</strong>
+      </div>
+      <div style="padding: 18px 22px; font-size: 0.95rem; line-height: 1.8;">
+        Seleccione al menos <strong>tres de los ocho principios</strong> del Artículo 4° que considere fueron violados por "Salud &amp; Vida S.A.S." y explique por qué. <em>(Ej: Finalidad, Libertad, Confidencialidad).</em>
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); overflow: hidden;">
+      <div style="background: #6A0D83; padding: 14px 22px; display: flex; align-items: center; gap: 14px;">
+        <span style="background: white; color: #6A0D83; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;">D</span>
+        <strong style="color: white; font-size: 1rem;">Categorías Especiales de Datos — Art. 5° y 6° de la Ley 1581</strong>
+      </div>
+      <div style="padding: 18px 22px; font-size: 0.95rem; line-height: 1.8;">
+        Analice el tratamiento de la pregunta sobre <strong>enfermedades preexistentes</strong> y el registro de la <strong>huella dactilar</strong>. ¿Qué tipo de datos son estos y qué requisitos especiales exige la ley para su tratamiento?
+      </div>
+    </div>
+
+    <div style="background: var(--white); border-radius: 10px; box-shadow: 0 3px 14px rgba(0,0,0,0.07); overflow: hidden;">
+      <div style="background: #C9A227; padding: 14px 22px; display: flex; align-items: center; gap: 14px;">
+        <span style="background: var(--navy); color: var(--gold); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;">E</span>
+        <strong style="color: var(--navy); font-size: 1rem;">Acción ante la Autoridad — Arts. 22–24 de la Ley 1581</strong>
+      </div>
+      <div style="padding: 18px 22px; font-size: 0.95rem; line-height: 1.8;">
+        Si el estudiante desea presentar una queja formal, ¿ante qué <strong>autoridad</strong> debe hacerlo y qué <strong>sanción administrativa</strong> podría enfrentar el gimnasio?
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ MAPA CONCEPTUAL ══════════════════ -->
+<section id="mapa" style="overflow-x: auto;">
+  <h2 class="section-title">Mapa Conceptual — Ley 1581 de 2012</h2>
+  <p class="section-subtitle">Relaciones conceptuales principales</p>
+
+  <!-- Estilos del árbol conceptual (scope a esta sección) -->
+  <style>
+    .mc-tree { width: 100%; text-align: center; padding-bottom: 20px; }
+    .mc-tree ul {
+      padding-top: 20px; position: relative;
+      display: flex; justify-content: center;
+      padding-left: 0; margin: 0;
+    }
+    .mc-tree li {
+      float: left; text-align: center; list-style-type: none;
+      position: relative; padding: 20px 5px 0 5px;
+      transition: all 0.5s; flex-grow: 1;
+    }
+    .mc-tree li::before, .mc-tree li::after {
+      content: ''; position: absolute; top: 0; right: 50%;
+      border-top: 2px solid #4A5568; width: 50%; height: 20px;
+    }
+    .mc-tree li::after { right: auto; left: 50%; border-left: 2px solid #4A5568; }
+    .mc-tree li:only-child::after, .mc-tree li:only-child::before { display: none; }
+    .mc-tree li:only-child { padding-top: 0; }
+    .mc-tree li:first-child::before, .mc-tree li:last-child::after { border: 0 none; }
+    .mc-tree li:last-child::before { border-right: 2px solid #4A5568; border-radius: 0 5px 0 0; }
+    .mc-tree li:first-child::after { border-radius: 5px 0 0 0; }
+    .mc-tree ul ul::before {
+      content: ''; position: absolute; top: 0; left: 50%;
+      border-left: 2px solid #4A5568; width: 0; height: 20px;
+    }
+    .mc-node {
+      border: 2px solid #1B2A4A; padding: 12px 18px;
+      color: #FFFFFF; font-size: 13px; font-weight: bold;
+      display: inline-block; border-radius: 8px;
+      background-color: #2E4A7A;
+      box-shadow: 3px 3px 0px #C9A227;
+      position: relative; z-index: 10; min-width: 120px;
+    }
+    .mc-root {
+      background-color: #1B2A4A; font-size: 16px;
+      padding: 15px 25px; border: 3px solid #C9A227;
+    }
+    .mc-link {
+      display: block; margin: -10px auto 5px;
+      background: #F7F3EC; color: #666; font-size: 11px;
+      font-style: italic; width: fit-content; padding: 2px 8px;
+      position: relative; z-index: 20;
+      border: 1px solid #ddd; border-radius: 10px;
+    }
+    .mc-cat-data     { background-color: #0D7A6B; border-color: #084d43; }
+    .mc-cat-rights   { background-color: #2E4A7A; border-color: #1B2A4A; }
+    .mc-cat-sanctions{ background-color: #8B1A1A; border-color: #5c1111; }
+    .mc-cat-principles{ background-color: #C9A227; color: #1B2A4A; border-color: #a6851f; }
+    .mc-decree       { background: #4A5568; box-shadow: 3px 3px 0px #1B2A4A; }
+
+    @media screen and (max-width: 800px) {
+      .mc-tree ul { flex-direction: column; align-items: center; }
+      .mc-tree li { padding: 20px 0; }
+      .mc-tree li::before, .mc-tree li::after { display: none; }
+      .mc-tree ul ul::before { display: none; }
+    }
+  </style>
+
+  <div class="mc-tree">
+    <ul>
+      <li>
+        <div class="mc-node mc-root">LEY 1581 DE 2012<br><small>Protección de Datos Personales</small></div>
+        <ul>
+          <!-- RAMA 1: PRINCIPIOS -->
+          <li>
+            <span class="mc-link">Se rige por</span>
+            <div class="mc-node mc-cat-principles">8 PRINCIPIOS RECTORES<br>(Art. 4°)</div>
+            <ul>
+              <li>
+                <span class="mc-link">Como son</span>
+                <div class="mc-node mc-cat-principles" style="font-weight: normal; font-size: 11px;">
+                  Legalidad, Finalidad, Libertad, Veracidad,<br>
+                  Transparencia, Acceso Restringido, Seguridad,<br>
+                  y Confidencialidad
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- RAMA 2: CATEGORÍAS -->
+          <li>
+            <span class="mc-link">Clasifica las</span>
+            <div class="mc-node mc-cat-data">CATEGORÍAS DE DATOS</div>
+            <ul>
+              <li>
+                <span class="mc-link">Divididos en</span>
+                <div class="mc-node mc-cat-data" style="font-weight: normal;">
+                  <b>Públicos:</b> Accesibles a todos<br>
+                  <b>Semiprivados:</b> Requieren autorización<br>
+                  <b>Privados:</b> Ámbito íntimo<br>
+                  <b>Sensibles:</b> Protección reforzada
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- RAMA 3: DERECHOS -->
+          <li>
+            <span class="mc-link">Garantiza los</span>
+            <div class="mc-node mc-cat-rights">DERECHOS ARCO</div>
+            <ul>
+              <li>
+                <span class="mc-link">Permite al titular</span>
+                <div class="mc-node mc-cat-rights" style="font-weight: normal;">
+                  Acceso, Rectificación,<br>
+                  Cancelación y Oposición<br>
+                  de su información
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- RAMA 4: SANCIONES -->
+          <li>
+            <span class="mc-link">Impone</span>
+            <div class="mc-node mc-cat-sanctions">RÉGIMEN SANCIONATORIO</div>
+            <ul>
+              <li>
+                <span class="mc-link">Vigilado por la SIC</span>
+                <div class="mc-node mc-cat-sanctions" style="font-weight: normal;">
+                  <b>Multas:</b> Hasta 100K SMMLV<br>
+                  <b>Cierres:</b> Temporales o Definitivos
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <div style="margin-top: 40px;">
+      <span class="mc-link">Reglamentada por el</span>
+      <div class="mc-node mc-decree">DECRETO 1377 DE 2013</div>
+    </div>
+
+    <div style="margin-top: 28px; font-size: 0.85rem; color: var(--gray); border-top: 1px solid var(--light-gray); padding-top: 16px; text-align: center;">
+      <strong>Base constitucional:</strong> Art. 15 C.P. (Intimidad y Habeas Data) &nbsp;|&nbsp;
+      <strong>Vigencia:</strong> Desde el 18 de octubre de 2012 &nbsp;|&nbsp;
+      <strong>Jurisprudencia:</strong> Sentencia C-748 de 2011, C.C.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BIBLIOGRAFÍA ══════════════════ -->
+<section id="bibliografia">
+  <h2 class="section-title">Bibliografía y Referencias</h2>
+  <p class="section-subtitle">Fuentes primarias y doctrinales</p>
+
+  <ul class="biblio-list">
+    <li>
+      <div class="bnum">1</div>
+      <div>Colombia. Congreso de la República. (2012). <em>Ley 1581 de 2012: Por la cual se dictan disposiciones generales para la protección de datos personales.</em> Diario Oficial No. 48.587 del 18 de octubre de 2012. Disponible en: <a href="https://www.funcionpublica.gov.co" target="_blank">www.funcionpublica.gov.co</a></div>
+    </li>
+    <li>
+      <div class="bnum">2</div>
+      <div>Colombia. Congreso de la República. (2008). <em>Ley 1266 de 2008: Por la cual se dictan las disposiciones generales del hábeas data y se regula el manejo de la información contenida en bases de datos personales.</em> Diario Oficial No. 47.219.</div>
+    </li>
+    <li>
+      <div class="bnum">3</div>
+      <div>Colombia. Presidencia de la República. (2013). <em>Decreto 1377 de 2013: Por el cual se reglamenta parcialmente la Ley 1581 de 2012.</em> Diario Oficial No. 48.834 del 27 de junio de 2013.</div>
+    </li>
+    <li>
+      <div class="bnum">4</div>
+      <div>Colombia. Presidencia de la República. (2015). <em>Decreto Único Reglamentario 1081 de 2015 del Sector Presidencia de la República.</em> Compila, entre otros, el Decreto 1377 de 2013.</div>
+    </li>
+    <li>
+      <div class="bnum">5</div>
+      <div>Corte Constitucional de Colombia. (2011). <em>Sentencia C-748 de 2011.</em> M.P. Jorge Ignacio Pretelt Chaljub. Revisión constitucional de la Ley Estatutaria 1581 de 2012. Bogotá.</div>
+    </li>
+    <li>
+      <div class="bnum">6</div>
+      <div>Superintendencia de Industria y Comercio — SIC. (2023). <em>Guía para la implementación del principio de responsabilidad demostrada (Accountability).</em> Bogotá: SIC. Disponible en: <a href="https://www.sic.gov.co" target="_blank">www.sic.gov.co</a></div>
+    </li>
+    <li>
+      <div class="bnum">7</div>
+      <div>Remolina Angarita, N. (2013). <em>Tratamiento de datos personales: Aproximación internacional y comentarios a la ley 1581 de 2012.</em> Bogotá: Legis Editores.</div>
+    </li>
+    <li>
+      <div class="bnum">8</div>
+      <div>Téllez Valdés, J. (2020). <em>Derecho Informático</em> (5.ª ed.). Ciudad de México: McGraw Hill. (Capítulo sobre protección de datos personales en Latinoamérica).</div>
+    </li>
+    <li>
+      <div class="bnum">9</div>
+      <div>Organización para la Cooperación y el Desarrollo Económicos — OCDE. (2013). <em>The OECD Privacy Framework.</em> París: OECD Publishing. DOI: <a href="https://doi.org/10.1787/9789264195561-en" target="_blank">10.1787/9789264195561-en</a></div>
+    </li>
+    <li>
+      <div class="bnum">10</div>
+      <div>Azuero Zúñiga, F. A. (2019). <em>Manual de protección de datos personales en Colombia.</em> Bogotá: Universidad Externado de Colombia.</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <p>
+    <strong>Habilidades Informáticas en el Ámbito Jurídico</strong><br>
+    Facultad de Derecho y Ciencia Política — Programa Académico de Derecho<br>
+    Material elaborado con fines académicos para la plataforma Moodle — 2026<br>
+    <em>Fuente principal: Ley 1581 de 2012 — Diario Oficial No. 48.587 — República de Colombia</em>
+  </p>
+</footer>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('section, div[id="portada"]');
+  const navLinks = document.querySelectorAll('nav ul li a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
